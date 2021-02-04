@@ -12,9 +12,9 @@ class Dwarf {
         this.pos = 0;
         this.prevPos = 0;
         this.gold = 0;
-        this.purpose = 0 /* NONE */;
+        this.purpose = 0 /* NONE */ ;
         this.turnBack = false;
-        this.height = 70 /* groundLevel */;
+        this.height = 70 /* groundLevel */ ;
         this.drunkSpeed = 0.1 - Math.random() * 0.05;
     }
     _render(palette, canvas) {
@@ -23,7 +23,7 @@ class Dwarf {
                 const n = B_DWARF[y] >> 2 * (7 - x) & 0b11;
                 if (n != 0b10) {
                     canvas.fillStyle = '#' + palette[n];
-                    canvas.fillRect(3 /* B_SCALE */ * x, 3 /* B_SCALE */ * y, 3 /* B_SCALE */, 3 /* B_SCALE */);
+                    canvas.fillRect(3 /* B_SCALE */ * x, 3 /* B_SCALE */ * y, 3 /* B_SCALE */ , 3 /* B_SCALE */ );
                 }
             }
         }
@@ -37,35 +37,34 @@ class Dwarf {
         const speed = dwarfSpeed * (this.pos < 230 ? speedFortress :
             (this.pos > 690 ? speedTreasure : speedForest));
         switch (this.purpose) {
-            case 1 /* TREASURE */:
+            case 1 /* TREASURE */ :
                 this.turnBack = false;
                 this.pos += speed;
                 if (this.pos >= 2 * SCREEN_WIDTH) {
                     this.pos = 2 * SCREEN_WIDTH;
                     this.gold = dwarfCapacity;
-                    this.purpose = 2 /* FORTRESS */;
+                    this.purpose = 2 /* FORTRESS */ ;
                 }
                 break;
-            case 2 /* FORTRESS */:
+            case 2 /* FORTRESS */ :
                 this.turnBack = true;
                 this.pos -= speed;
                 if (this.pos <= 0) {
                     this.pos = 0;
                     updateGold(this.gold);
                     this.gold = 0;
-                    this.purpose = 0 /* NONE */;
+                    this.purpose = 0 /* NONE */ ;
                     this.turnBack = false;
                 }
                 break;
-            case 3 /* ALE */:
+            case 3 /* ALE */ :
                 if (Math.random() < 0.004)
                     this.turnBack = !this.turnBack;
                 this.pos += this.drunkSpeed * (this.turnBack ? -speed : speed);
                 if (this.pos < 250) {
                     this.pos = 250;
                     this.turnBack = false;
-                }
-                else if (this.pos > 670) {
+                } else if (this.pos > 670) {
                     this.pos = 670;
                     this.turnBack = true;
                 }
@@ -79,16 +78,18 @@ class Dwarf {
             this.turnBack = Math.random() < 0.5;
         }
         this.gold = 0;
-        this.purpose = 3 /* ALE */;
+        this.purpose = 3 /* ALE */ ;
         this.height = (0 | Math.random() * 35) + 50;
     }
 }
 const dwarfs = [];
 let dwarfsWaiting = [];
+
 function dwarfsFoundAle() {
     dwarfAle = true;
     dwarfs.forEach(dwarf => dwarf.haveFun(true));
 }
+
 function dwarfsNoAle() {
     dwarfAle = false;
     const survivors = dwarfs.filter(dwarf => dwarf.pos < 230 || dwarf.pos > 690).length;

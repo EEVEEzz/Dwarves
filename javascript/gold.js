@@ -6,6 +6,7 @@ const goldSpawn = [
 let totalGold = 0;
 let draftCost = 1;
 let draftCostPrev = 1;
+
 function updateButtons() {
     $setEnabled('btn-draft', totalGold >= draftCost);
     $setEnabled('btn-covfefe', totalGold >= 10);
@@ -20,6 +21,7 @@ function updateButtons() {
     $setEnabled('btn-portal', totalGold >= 60);
     $setEnabled('btn-delorean', totalGold >= 90);
 }
+
 function updateGold(n) {
     if (totalGold == 0) { // First update
         $('gold-title').style.display = 'inline';
@@ -34,6 +36,7 @@ function updateGold(n) {
     $setContent('gold-count', totalGold);
     updateButtons();
 }
+
 function updateDraftCost() {
     let t = draftCost;
     draftCost += draftCostPrev;

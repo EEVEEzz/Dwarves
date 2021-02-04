@@ -1,14 +1,12 @@
 "use strict";
 $click('btn-adventure', () => {
     if (dwarfsWaiting.length)
-        dwarfsWaiting[0].purpose = 1 /* TREASURE */;
+        dwarfsWaiting[0].purpose = 1 /* TREASURE */ ;
     if (started)
         return;
     try {
         audioInit().then(playLoop);
-    }
-    catch (err) {
-    }
+    } catch (err) {}
     started = true;
 });
 $click('btn-draft', () => {
@@ -106,9 +104,9 @@ $click('btn-genetic', () => {
 });
 $click('btn-portal', () => {
     updateGold(-60);
-    renderPortal(bufFortress.getContext('2d'), 432 - 3 /* B_SCALE */ * 6, 70 /* groundLevel */ - 3 /* B_SCALE */, PAL_PORTAL_BLUE);
-    renderPortal(bufFortressExit.getContext('2d'), 432 - 3 /* B_SCALE */ * 6, 70 /* groundLevel */ - 3 /* B_SCALE */, PAL_PORTAL_BLUE);
-    renderPortal(bufTreasure.getContext('2d'), 32, 70 /* groundLevel */ - 3 /* B_SCALE */, PAL_PORTAL_ORANGE);
+    renderPortal(bufFortress.getContext('2d'), 432 - 3 /* B_SCALE */ * 6, 70 /* groundLevel */ - 3 /* B_SCALE */ , PAL_PORTAL_BLUE);
+    renderPortal(bufFortressExit.getContext('2d'), 432 - 3 /* B_SCALE */ * 6, 70 /* groundLevel */ - 3 /* B_SCALE */ , PAL_PORTAL_BLUE);
+    renderPortal(bufTreasure.getContext('2d'), 32, 70 /* groundLevel */ - 3 /* B_SCALE */ , PAL_PORTAL_ORANGE);
     dwarfPortal = true;
     $despawn('portal');
 });
@@ -136,11 +134,11 @@ $click('btn-back', () => {
         }, 300);
     }, 10);
 });
-for (let btn of ['btn-adventure', 'btn-draft', 'btn-covfefe', 'btn-fasta', 'btn-autorun',
-    'btn-turborun', 'btn-speedrun', 'btn-illuminate', 'btn-continue', 'btn-orbital',
-    'btn-continue2', 'btn-develop', 'btn-develop2', 'btn-genetic', 'btn-portal',
-    'btn-delorean', 'btn-back']) {
-    $(btn).oncontextmenu = function (event) {
+for (let btn of['btn-adventure', 'btn-draft', 'btn-covfefe', 'btn-fasta', 'btn-autorun',
+        'btn-turborun', 'btn-speedrun', 'btn-illuminate', 'btn-continue', 'btn-orbital',
+        'btn-continue2', 'btn-develop', 'btn-develop2', 'btn-genetic', 'btn-portal',
+        'btn-delorean', 'btn-back']) {
+    $(btn).oncontextmenu = function(event) {
         event.preventDefault();
     };
 }

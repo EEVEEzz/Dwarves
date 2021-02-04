@@ -91,12 +91,10 @@ const B_EXIT = [
     0b00000000000000000000000000,
 ]; // opacity is 0b10 | 0b11
 const FACTORY = [
-    1,
-    [0, 18, 8, 27],
+    1, [0, 18, 8, 27],
     [5, 7, 3, 11],
     [14, 7, 3, 11],
-    2,
-    [8, 18, 24, 27],
+    2, [8, 18, 24, 27],
     [8, 7, 2, 11],
     [17, 7, 2, 11],
     // [8, 0, 1, 1],
@@ -106,8 +104,7 @@ const FACTORY = [
     [15, 1, 1, 1],
     [17, 2, 1, 1],
     [16, 3, 1, 1],
-    0,
-    [10, 22, 3, 5],
+    0, [10, 22, 3, 5],
     [16, 22, 2, 3],
     [20, 22, 2, 3],
     [5, 5, 5, 2],
@@ -115,90 +112,86 @@ const FACTORY = [
     2,
 ];
 const CHEST = [
-    1,
-    [0, 0, 20, 11],
-    0,
-    [9, 0, 2, 4],
+    1, [0, 0, 20, 11],
+    0, [9, 0, 2, 4],
     [0, 6, 20, 1],
     [0, 11, 20, 2],
-    2,
-    [2, 5, 2, 2],
+    2, [2, 5, 2, 2],
     [16, 5, 2, 2],
     [9, 4, 2, 4],
     [8, 5, 4, 2],
-    3,
-    [0, 0, 1, 1],
+    3, [0, 0, 1, 1],
     [19, 0, 1, 1],
 ];
 /* Utility functions */
 function lerp(a, b, t) {
-  return a * (1 - t) + b * t;
+    return a * (1 - t) + b * t;
 }
 
 function clamp(x, a, b) {
-  return (x < a) ? a : (x > b) ? b : x;
+    return (x < a) ? a : (x > b) ? b : x;
 }
 
 function easeInQuad(t) {
-  return t * t;
+    return t * t;
 }
 
 function easeOutQuad(t) {
-  return t * (2 - t);
+    return t * (2 - t);
 }
 
 function $(a) {
-  return document.getElementById(a);
+    return document.getElementById(a);
 }
 
 function $enable(a) {
-  $(a).removeAttribute('disabled');
+    $(a).removeAttribute('disabled');
 }
 
 function $disable(a) {
-  $(a).setAttribute('disabled', 'disabled');
+    $(a).setAttribute('disabled', 'disabled');
 }
 
 function $setEnabled(a, b) {
-  if (b)
-    $enable(a);
-  else
-    $disable(a);
+    if (b)
+        $enable(a);
+    else
+        $disable(a);
 }
 
 function $setContent(a, b) {
-  $(a).textContent = '' + b;
+    $(a).textContent = '' + b;
 }
 
 function $click(a, b) {
-  $(a).addEventListener('click', event => {
-    event.preventDefault();
-    b();
-  });
+    $(a).addEventListener('click', event => {
+        event.preventDefault();
+        b();
+    });
 }
 
 function $spawn(a) {
-  $(a).className = 'obj spawn';
+    $(a).className = 'obj spawn';
 }
 
 function $despawn(a, done) {
-  $(a).className = 'obj despawn';
-  setTimeout(() => {
-    $(a).style.display = 'none';
-    if (done)
-      done();
-  }, 500);
+    $(a).className = 'obj despawn';
+    setTimeout(() => {
+        $(a).style.display = 'none';
+        if (done)
+            done();
+    }, 500);
 }
 
 function $spawnModal(a) {
-  $('fullscreen').style.display = 'block';
-  $spawn(a);
+    $('fullscreen').style.display = 'block';
+    $spawn(a);
 }
 
 function $despawnModal(a, done) {
-  $despawn(a, () => {
-    $('fullscreen').style.display = 'none';
-    if (done)
-      done();
-  });
+    $despawn(a, () => {
+        $('fullscreen').style.display = 'none';
+        if (done)
+            done();
+    });
 }

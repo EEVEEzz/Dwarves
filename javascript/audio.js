@@ -1,17 +1,20 @@
 "use strict";
 const TEMPO_MUL = 120 / 118;
+
 function noteFreq(n) {
     return 440 * Math.pow(2, (n - 69) / 12);
 }
 let ac;
 let out;
 let songStart;
+
 function audioInit() {
     ac = new AudioContext;
     out = ac.createGain();
     out.gain.value = 0.4;
     return reverb();
 }
+
 function playNote(n, start, end) {
     const freq = noteFreq(n);
     start *= TEMPO_MUL;
@@ -23,6 +26,7 @@ function playNote(n, start, end) {
     osc.start(songStart + start);
     osc.stop(songStart + end);
 }
+
 function decay(osc, start) {
     const env = ac.createGain();
     env.gain.setValueAtTime(0.5, songStart + start);
@@ -42,14 +46,14 @@ function reverb() {
     conv.connect(wet);
     dry.connect(ac.destination);
     wet.connect(ac.destination);
-    return new Promise(function (resolve) {
+    return new Promise(function(resolve) {
         generateReverb({
             audioContext: ac,
             fadeIn: 0.00001,
             decay: 1.5 * TEMPO_MUL,
             lpFreqStart: 16000,
             lpFreqEnd: 1000,
-        }, function (buf) {
+        }, function(buf) {
             conv.buffer = buf;
             resolve();
         });

@@ -5,7 +5,7 @@ const bufGold = renderBuf(3 /* B_SCALE */ * 8, 3 /* B_SCALE */ * 9, canvas => {
             const n = B_GOLD[y] >> 2 * (7 - x) & 0b11;
             if (n) {
                 canvas.fillStyle = '#' + PAL_GOLD[n];
-                canvas.fillRect(3 /* B_SCALE */ * x, 3 /* B_SCALE */ * y, 3 /* B_SCALE */, 3 /* B_SCALE */);
+                canvas.fillRect(3 /* B_SCALE */ * x, 3 /* B_SCALE */ * y, 3 /* B_SCALE */ , 3 /* B_SCALE */ );
             }
         }
     }
@@ -41,22 +41,20 @@ const bufFactory = renderBuf(3 /* B_SCALE */ * 24, 3 /* B_SCALE */ * 27, canvas 
     for (let a of FACTORY) {
         if (typeof a == 'number') {
             canvas.fillStyle = '#' + PAL_WASTELAND[a];
-        }
-        else {
+        } else {
             canvas.fillRect(3 /* B_SCALE */ * a[0], 3 /* B_SCALE */ * a[1], 3 /* B_SCALE */ * a[2], 3 /* B_SCALE */ * a[3]);
         }
     }
     for (let n = 0; n < 6; ++n) {
-        canvas.fillRect(3 /* B_SCALE */ * 7, 3 /* B_SCALE */ * (2 * n + 7), 3 /* B_SCALE */, 3 /* B_SCALE */);
-        canvas.fillRect(3 /* B_SCALE */ * 16, 3 /* B_SCALE */ * (2 * n + 7), 3 /* B_SCALE */, 3 /* B_SCALE */);
+        canvas.fillRect(3 /* B_SCALE */ * 7, 3 /* B_SCALE */ * (2 * n + 7), 3 /* B_SCALE */ , 3 /* B_SCALE */ );
+        canvas.fillRect(3 /* B_SCALE */ * 16, 3 /* B_SCALE */ * (2 * n + 7), 3 /* B_SCALE */ , 3 /* B_SCALE */ );
     }
 });
 const bufChest = renderBuf(40, 26, canvas => {
     for (let a of CHEST) {
         if (typeof a == 'number') {
             canvas.fillStyle = '#' + PAL_CHEST[a];
-        }
-        else {
+        } else {
             canvas.fillRect(2 * a[0], 2 * a[1], 2 * a[2], 2 * a[3]);
         }
     }
@@ -67,22 +65,24 @@ const bufExit = renderBuf(3 /* B_SCALE */ * 13, 3 /* B_SCALE */ * 13, canvas => 
             const n = B_EXIT[y] >> 2 * x & 0b11;
             if (n < 2) {
                 canvas.fillStyle = '#' + PAL_FORTRESS[n];
-                canvas.fillRect(3 /* B_SCALE */ * x, 3 /* B_SCALE */ * y, 3 /* B_SCALE */, 3 /* B_SCALE */);
+                canvas.fillRect(3 /* B_SCALE */ * x, 3 /* B_SCALE */ * y, 3 /* B_SCALE */ , 3 /* B_SCALE */ );
             }
         }
     }
 });
+
 function renderPortal(canvas, x0, y0, palette) {
     for (let y = 0; y < B_PORTAL.length; ++y) {
         for (let x = 0; x < 6; ++x) {
             const n = B_PORTAL[y] >> 2 * x & 0b11;
             if (n != 0b00) {
                 canvas.fillStyle = '#' + palette[n];
-                canvas.fillRect(3 /* B_SCALE */ * x + x0, 3 /* B_SCALE */ * y + y0, 3 /* B_SCALE */, 3 /* B_SCALE */);
+                canvas.fillRect(3 /* B_SCALE */ * x + x0, 3 /* B_SCALE */ * y + y0, 3 /* B_SCALE */ , 3 /* B_SCALE */ );
             }
         }
     }
 }
+
 function renderFortress(withExit) {
     return canvas => {
         canvas.fillStyle = '#' + PAL_FORTRESS[3];
@@ -97,8 +97,7 @@ function renderFortress(withExit) {
                 canvas.fillRect(20 * n + 1, 112, 20, 4);
                 canvas.fillRect(20 * n, 116, 20, 4);
                 canvas.fillRect(20 * n - 1, 120, 20, 4);
-            }
-            else {
+            } else {
                 canvas.fillRect(20 * n + 3, 100, 20, 4);
                 canvas.fillRect(20 * n + 2, 104, 20, 4);
                 canvas.fillRect(20 * n + 1, 108, 20, 4);
@@ -114,6 +113,7 @@ function renderFortress(withExit) {
 }
 const bufFortress = renderBuf(SCREEN_WIDTH, SCREEN_HEIGHT, renderFortress(false));
 const bufFortressExit = renderBuf(SCREEN_WIDTH, SCREEN_HEIGHT, renderFortress(true));
+
 function renderForest(palette, title) {
     return canvas => {
         canvas.fillStyle = '#' + palette[3];
@@ -135,6 +135,7 @@ const bufForestKegs = renderBuf(SCREEN_WIDTH, SCREEN_HEIGHT, canvas => {
     canvas.drawImage(bufKeg, 74, 16);
     canvas.drawImage(bufKeg, 101, 16);
 });
+
 function renderWasteland(title, features) {
     return canvas => {
         canvas.fillStyle = '#' + PAL_WASTELAND[3];
@@ -181,6 +182,7 @@ const bufTreasure = renderBuf(SCREEN_WIDTH, SCREEN_HEIGHT, canvas => {
     canvas.fillStyle = '#' + PAL_TREASURE[1];
     write('Fabled Treasure', canvas, 20, 20);
 });
+
 function easingPos(pos) {
     if (pos < 230)
         return 230 * easeInQuad(pos / 230);
@@ -188,6 +190,7 @@ function easingPos(pos) {
         return 230 * easeOutQuad((pos - 690) / 230) + 690;
     return pos;
 }
+
 function renderDwarfs(t, canvas, palette, zonePos, k) {
     let populated = false;
     if (dwarfAle)
@@ -203,7 +206,7 @@ function renderDwarfs(t, canvas, palette, zonePos, k) {
         canvas.translate(pos + 2, 0);
         switch (dwarf.gold) {
             case 1:
-                canvas.drawImage(bufGold, -4 * 3 /* B_SCALE */, 70 /* groundLevel */ - 40);
+                canvas.drawImage(bufGold, -4 * 3 /* B_SCALE */ , 70 /* groundLevel */ - 40);
                 break;
             case 3:
                 canvas.drawImage(bufGold, -8, 70 /* groundLevel */ - 48, 16, 18);
@@ -213,7 +216,7 @@ function renderDwarfs(t, canvas, palette, zonePos, k) {
         }
         if (dwarf.turnBack)
             canvas.scale(-1, 1);
-        canvas.drawImage(dwarf.buf(palette), -4 * 3 /* B_SCALE */, 3 /* B_SCALE */ * 11 * (1 - k) + dwarf.height, 3 /* B_SCALE */ * 8, 3 /* B_SCALE */ * 11 * k);
+        canvas.drawImage(dwarf.buf(palette), -4 * 3 /* B_SCALE */ , 3 /* B_SCALE */ * 11 * (1 - k) + dwarf.height, 3 /* B_SCALE */ * 8, 3 /* B_SCALE */ * 11 * k);
         canvas.restore();
     }
     return populated;
@@ -228,26 +231,24 @@ class Zone {
             this.spawn = undefined;
         }
         if (this.renderWaiting && dwarfsWaiting.length) {
-            const count = Math.min(dwarfsWaiting.length + clearedForLanding, 24 /* WAITING_SIZE */);
+            const count = Math.min(dwarfsWaiting.length + clearedForLanding, 24 /* WAITING_SIZE */ );
             const buf = dwarfsWaiting[0].buf(this.palette);
             let pos, height;
             for (let n = count - 1; n >= clearedForLanding; --n) {
-                if (n >= 9 /* WAITING_BOTTOM */) {
-                    if (n >= 17 /* WAITING_SIZE_BM */) {
+                if (n >= 9 /* WAITING_BOTTOM */ ) {
+                    if (n >= 17 /* WAITING_SIZE_BM */ ) {
                         pos = 14 /* WAITING_TOP_POS */ + 3 /* B_SCALE */ *
                             (9 * (24 /* WAITING_SIZE */ - n) - 4);
                         height = 70 /* groundLevel */ - 46;
-                    }
-                    else {
+                    } else {
                         pos = 0 /* WAITING_MIDDLE_POS */ + 3 /* B_SCALE */ *
                             (9 * (17 /* WAITING_SIZE_BM */ - n) - 4);
                         height = 70 /* groundLevel */ - 23;
                     }
-                }
-                else {
+                } else {
                     pos = -13 /* WAITING_BOTTOM_POS */ + 3 /* B_SCALE */ *
                         (9 * (9 /* WAITING_BOTTOM */ - n) - 4);
-                    height = 70 /* groundLevel */;
+                    height = 70 /* groundLevel */ ;
                 }
                 this.canvas.drawImage(buf, pos + 2, height);
             }

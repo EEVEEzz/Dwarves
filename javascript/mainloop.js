@@ -1,9 +1,10 @@
 "use strict";
 let paused = false;
-const startMainloop = (function () {
+const startMainloop = (function() {
     const T = 0.02;
     let then = -1;
     let t = 0;
+
     function mainloop(now) {
         requestAnimationFrame(mainloop);
         if (paused) {
@@ -21,6 +22,7 @@ const startMainloop = (function () {
         }
         render(t / T + 1);
     }
+
     function startMainloop() {
         requestAnimationFrame(mainloop);
     }

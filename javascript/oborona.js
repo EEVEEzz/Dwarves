@@ -1,4 +1,5 @@
 "use strict";
+
 function playPart(n) {
     const hbar = n > 51 ? (n - 8) % 44 + 8 : n;
     switch (hbar) {
@@ -433,6 +434,7 @@ function playPart(n) {
     }
 }
 let prevPart = -1;
+
 function enqueue() {
     let bufferWanted = ac.currentTime - songStart + 4;
     let queued = (prevPart + 1) * TEMPO_MUL;
@@ -444,6 +446,7 @@ function enqueue() {
         queued += TEMPO_MUL;
     }
 }
+
 function playLoop() {
     songStart = ac.currentTime + 0.05;
     enqueue();
